@@ -41,3 +41,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Sky
+    uniqueID: 49270175
+    locked: 0
+  - name: Background
+    uniqueID: 2298377181
+    locked: 0
+  - name: Building
+    uniqueID: 772823601
+    locked: 0
+  - name: Soldier
+    uniqueID: 4213949117
+    locked: 0
+  - name: Item
+    uniqueID: 1209654377
+    locked: 0
