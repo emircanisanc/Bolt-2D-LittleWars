@@ -21,14 +21,14 @@ public class CGoldData : MonoBehaviour
         if(gold >= delta)
         {
             gold -= delta;
-            _OnGoldChanged(gold);
+            _OnGoldChanged?.Invoke(gold);
         }
     }
 
     public void IncGold()
     {
         gold++;
-        _OnGoldChanged(gold);
+        _OnGoldChanged?.Invoke(gold);
     }
 
     void Update()

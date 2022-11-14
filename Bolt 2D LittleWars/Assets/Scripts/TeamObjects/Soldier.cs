@@ -17,6 +17,7 @@ public class Soldier : TeamObject
     [SerializeField] protected LayerMask whatIsTarget;
     [SerializeField] protected Transform attackTransform;
 
+
     protected TeamObject target;
 
     void Update()
@@ -25,16 +26,15 @@ public class Soldier : TeamObject
         {
             if(toRight)
             {
-                Movement.AddMovementInput(transform.right, 1);
+                Movement.AddMovementInput(1);
             }
             else
             {
-                Movement.AddMovementInput(transform.right, -1);
+                Movement.AddMovementInput(-1);
             }
         }
         else
         {
-            Movement.AddMovementInput(Vector3.zero, 0);
             if(target)
             {
                 TryAttack();
@@ -56,20 +56,13 @@ public class Soldier : TeamObject
     {
         if(CanMove)
         {
-            var front = GetFrontHitResult();
-            if(front)
+            target = GetFrontHitResult();
+            if(target)
             {
-                if(front.GetTeam() != Team)
-                {
-                    target = front;
-                    return false;
-                }
-                target = null;
                 return false;
             }
             else
             {
-                target = null;
                 return true;
             }
         }
@@ -81,11 +74,17 @@ public class Soldier : TeamObject
 
     private TeamObject GetFrontHitResult()
     {
-        var result = Physics2D.OverlapCircle(attackTransform.position, attackRange, whatIsTarget);
-        if(result)
+        var result = Physics2D.OverlapCircleAll(attackTransform.position, attackRange, whatIsTarget);
+        if(result.Length > 0)
         {
-            var teamObj = result.GetComponent<TeamObject>();
-            return teamObj;
+            foreach(var res in result)
+            {
+                var teamObj = res.GetComponent<TeamObject>();
+                if(teamObj.GetTeam() != Team)
+                {
+                    return teamObj;
+                }
+            }
         }
         target = null;
         return null;

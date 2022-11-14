@@ -21,4 +21,23 @@ public class Market : MonoBehaviour
             return false;
         }
     }
+
+    public bool TryBuyAt(SMarketItem marketItem, CGoldData goldData)
+    {
+        if(goldData.GetGold() >= marketItem.CurrentSoldierGold() && _Castle.CanSpawn())
+        {
+            goldData.ReduceGold(marketItem.CurrentSoldierGold());
+            _Castle.SpawnSoldier(marketItem.CurrentSoldier());
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public SMarketItem[] GetMarketItems()
+    {
+        return soldiers;
+    }
 }

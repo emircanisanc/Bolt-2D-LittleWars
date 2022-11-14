@@ -5,7 +5,6 @@ public class CMovement : MonoBehaviour
 {
     [SerializeField] private float speed;
     private float inputAxis;
-    private Vector3 direction;
 
     private Rigidbody2D rg2D;
 
@@ -14,7 +13,7 @@ public class CMovement : MonoBehaviour
         rg2D = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Move();
     }
@@ -23,14 +22,19 @@ public class CMovement : MonoBehaviour
     {
         if(inputAxis != 0)
         {
-            rg2D.MovePosition(transform.position + direction * inputAxis * speed);
-        }    
+            rg2D.MovePosition(transform.position + inputAxis * speed * transform.right * Time.fixedDeltaTime);
+        }   
+        
     }
 
-    public void AddMovementInput(Vector3 direction, float inputAxis)
+    public void AddMovementInput(float inputAxis)
     {
         this.inputAxis = inputAxis;
-        this.direction = direction;
+
+    }
+    public bool IsMoving()
+    {
+        return rg2D.velocity.x != 0;
     }
 
 }
