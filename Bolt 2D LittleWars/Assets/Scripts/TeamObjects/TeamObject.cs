@@ -6,8 +6,7 @@ using UnityEngine;
 public abstract class TeamObject : MonoBehaviour, IDamageable
 {
     [SerializeField] protected ETeam Team;
-
-    protected CHealth _Chealth;
+    [SerializeField] protected CHealth _Chealth;
 
     public float ApplyDamage(float damage)
     {
@@ -26,11 +25,6 @@ public abstract class TeamObject : MonoBehaviour, IDamageable
     public ETeam GetTeam()
     {
         return Team;
-    }
-
-    void Awake()
-    {
-        _Chealth = GetComponent<CHealth>();
     }
 
     protected void OnDeath()

@@ -21,7 +21,7 @@ public class CMovement : MonoBehaviour
 
     private void Move()
     {
-        if(inputAxis > 0)
+        if(inputAxis != 0)
         {
             rg2D.MovePosition(transform.position + direction * inputAxis * speed);
         }    
