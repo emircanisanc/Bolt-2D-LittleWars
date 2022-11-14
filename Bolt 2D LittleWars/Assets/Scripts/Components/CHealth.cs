@@ -30,4 +30,9 @@ public class CHealth : MonoBehaviour
     {
         return currentHealth <= 0;
     }
+
+    void Awake()
+    {
+        ResetHealth();
+    }
 }
