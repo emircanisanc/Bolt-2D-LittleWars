@@ -31,6 +31,12 @@ public class CHealth : MonoBehaviour
         return currentHealth <= 0;
     }
 
+    public void UpgradeHealth(float extraHealth, bool add2CurrentHealth)
+    {
+        maxHealth += extraHealth;
+        currentHealth = add2CurrentHealth? currentHealth+extraHealth : currentHealth;
+    }
+
     void Awake()
     {
         ResetHealth();

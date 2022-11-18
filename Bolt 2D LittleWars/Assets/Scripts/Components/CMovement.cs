@@ -13,18 +13,14 @@ public class CMovement : MonoBehaviour
         rg2D = GetComponent<Rigidbody2D>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         Move();
     }
 
     private void Move()
     {
-        if(inputAxis != 0)
-        {
-            rg2D.MovePosition(transform.position + inputAxis * speed * transform.right * Time.fixedDeltaTime);
-        }   
-        
+        rg2D.velocity = new Vector2(inputAxis * speed, rg2D.velocity.y);    
     }
 
     public void AddMovementInput(float inputAxis)

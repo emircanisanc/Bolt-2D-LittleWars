@@ -5,6 +5,7 @@ using UnityEngine;
 public class CGoldData : MonoBehaviour
 {
     [SerializeField] private float goldRate;
+    [SerializeField] private int goldLimit;
     private float nextIncTime;
     private int gold;
 
@@ -27,8 +28,12 @@ public class CGoldData : MonoBehaviour
 
     public void IncGold()
     {
-        gold++;
-        _OnGoldChanged?.Invoke(gold);
+        if(gold < goldLimit)
+        {
+            gold++;
+            _OnGoldChanged?.Invoke(gold);
+        }
+        
     }
 
     void Update()

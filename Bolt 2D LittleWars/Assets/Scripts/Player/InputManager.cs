@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public float GetRightAxis()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        return Input.GetAxisRaw("Horizontal");
     }
 }

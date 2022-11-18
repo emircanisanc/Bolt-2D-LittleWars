@@ -1,14 +1,13 @@
 using UnityEngine;
 
 [System.Serializable]
-public struct SMarketItem
+public class SMarketItem
 {
     public Soldier[] soldierPrefabs;
     public Sprite[] soldierSprites;
     public SSoldierData[] soldierDatas;
     private int currentLevel;
     public int[] soldierGolds;
-    public int[] upgradeGolds;
 
     public Soldier CurrentSoldier()
     {
@@ -23,7 +22,7 @@ public struct SMarketItem
         }
     }
 
-    public bool CanUpgradeMore()
+    private bool CanUpgradeMore()
     {
         return soldierPrefabs.Length-1 > currentLevel;
     }
@@ -41,15 +40,5 @@ public struct SMarketItem
     {
         return soldierGolds[currentLevel];
     }
-    public int CurrentUpgradeGold()
-    {
-        if(upgradeGolds.Length-1 >= currentLevel)
-        {
-            return upgradeGolds[currentLevel];
-        }
-        else
-        {
-            return 0;
-        }
-    }
+
 }

@@ -7,15 +7,9 @@ public abstract class TeamObject : MonoBehaviour, IDamageable
 {
     [SerializeField] protected ETeam Team;
     [SerializeField] protected CHealth _Chealth;
+    [SerializeField] protected AnimatorController _AnimatorController;
 
-    public float ApplyDamage(float damage)
-    {
-        if(_Chealth.ReduceHealth(damage) <= 0)
-        {
-            OnDeath();
-        }
-        return _Chealth.GetCurrentHealth();
-    }
+    public abstract float ApplyDamage(float damage);
 
     public float GetHealth()
     {
@@ -27,8 +21,5 @@ public abstract class TeamObject : MonoBehaviour, IDamageable
         return Team;
     }
 
-    protected void OnDeath()
-    {
-
-    }
+    protected abstract void OnDeath();
 }

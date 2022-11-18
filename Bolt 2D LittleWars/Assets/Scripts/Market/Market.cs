@@ -6,6 +6,9 @@ public class Market : MonoBehaviour
 {
     [SerializeField] private SMarketItem[] soldiers;
     [SerializeField] private Castle _Castle;
+    private int level;
+    [SerializeField] private int maxLevel;
+    [SerializeField] private int[] upgradeGolds;
 
     public bool TryBuyAt(int index, CGoldData goldData)
     {
@@ -34,6 +37,40 @@ public class Market : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public bool CanUpgradeMore()
+    {
+        return level < maxLevel;
+    }
+
+    public int CurrentUpgradeGold()
+    {
+        return upgradeGolds[level];
+    }
+
+    public bool TryUpgrade(CGoldData goldData)
+    {
+        if(CanUpgradeMore())
+        {
+            if(goldData.GetGold() >= CurrentUpgradeGold())
+            {
+                goldData.ReduceGold(CurrentUpgradeGold());
+                foreach(var item in soldiers)
+                {
+                    item.Upgrade();
+                }
+                level++;
+                _Castle.Upgrade();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return false;
+        
     }
 
     public SMarketItem[] GetMarketItems()
